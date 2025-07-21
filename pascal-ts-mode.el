@@ -37,11 +37,11 @@
   (mapcar #'list ;; Keywords.
     '(kAnd kArray kAs kAsm kAt kBegin kCase kClass kConst kConstructor
          kDestructor kDispInterface kDiv kDo kDownto kElse kEnd kExcept kExports
-         kFile kFinalization kFinally kFor kFunction kGoto kIf kImplementation kImplements
+         kFile kFinalization kFinally kFor kFunction kGoto kHat kIf kImplementation kImplements
          kIn kInherited kInitialization kInterface kIs kLabel kLibrary kMod kNil kNot
-         kOf kObject kOn kOr kOut kPacked kProcedure kProgram kProperty
-         kRaise kRecord kRepeat kRequired kSet kShl kShr kThen kThreadvar
-         kTo kTry kType kUnit kUses kUntil kVar kWhile kWith kXor))
+         kOf kObject kOn kOr kOut kOverload kOverride kPacked kProcedure kProgram kProperty kPublic kPrivate
+         kProtected kRaise kRead kRecord kRepeat kRequired kSet kShl kShr kThen kThreadvar
+         kTo kTry kType kUnit kUses kUntil kVar kWhile kWith kWrite kXor))
   "OPASCAL4 keywords.")
 
 ;; missing kPackage, kContains, kRequires, kResult, kSelf
@@ -82,13 +82,23 @@
    :feature 'definition
    :override 'prepend
    '((assignment lhs: (identifier) @font-lock-function-name-face)
-    ((kProcedure) name: (identifier) @font-lock-function-name-face)
-    ((kFunction) name: (identifier) @font-lock-function-name-face)
-    (declArg name: (identifier) @font-lock-variable-use-face)
+     ([(kProcedure) (kFunction) (kConstructor) (kDestructor)]
+      name: (identifier) @font-lock-function-name-face)
+    (declArg name: (identifier) @font-lock-variable-name-face)
     (declConst name: (identifier) @font-lock-constant-face)
+    (declProc (kConstructor) name: (identifier) @font-lock-function-name-face)
+    (declProc [(kFunction) (kProcedure) (kConstructor) (kDestructor)]
+              name: (genericDot lhs: (identifier) @font-lock-type-face
+                                operator: _ rhs: (identifier) @font-lock-function-name-face))
     ((kNil) @font-lock-constant-face)
+    ((kTrue) @font-lock-constant-face)
+    ((kFalse) @font-lock-constant-face)
     ((declString (kString)) @font-lock-type-face)
-    (declVar name: (identifier) @font-lock-variable-use-face)
+    (declVar name: (identifier) @font-lock-variable-name-face)
+    (declProp _ name: (identifier) @font-lock-variable-name-face)
+    ((kRead) getter: (identifier) @font-lock-variable-use-face)
+    ((kRead) getter: (identifier) @font-lock-variable-use-face (kWrite) setter: (identifier) @font-lock-variable-use-face)
+    (inherited _ (identifier) @font-lock-variable-name-face)
     )
 
   ;; Types
@@ -98,27 +108,32 @@
     (declField name: (identifier) @font-lock-property-name-face)
     (declEnumValue name: (identifier) @font-lock-type-face)
     ((typeref (identifier)) @font-lock-type-face)
-    (recInitializerField name: (identifier) @font-lock-variable-name-face)
-    )
+    (typeref (typerefPtr operator: _ operand: (identifier) @font-lock-type-face))
+    (recInitializerField name: (identifier) @font-lock-variable-name-face))
 
   ;; Function and procedure calls.
   :language 'pascal
   :feature 'function
   :override 'prepend
 
-  '((exprCall entity: (identifier) @font-lock-function-call-face))
+  '((exprCall entity: (identifier) @font-lock-function-call-face)
+    (exprCall entity: (exprDot lhs: _ operator: _ rhs: (identifier) @font-lock-function-call-face))
+    (exprDot lhs: _ operator: _ rhs: (identifier) @font-lock-function-call-face)
+    (statement (identifier) @font-lock-function-call-face)
+    (exprCall
+       entity: (inherited _ (identifier) @font-lock-function-call-face)))
 
   ;; String
-     ;; String literals
-   :language 'pascal
-   :feature 'string
-   '((literalString) @font-lock-string-face)
+
+  :language 'pascal
+  :feature 'string
+  '((literalString) @font-lock-string-face)
 
 
-   ;; Numeric literals
-   :language 'pascal
-   :feature 'number
-   '((literalNumber) @font-lock-number-face)
+  ;; Numeric literals
+  :language 'pascal
+  :feature 'number
+  '((literalNumber) @font-lock-number-face)
 
    ;; Control
    :language 'pascal
@@ -126,6 +141,12 @@
    '((case (kCase) (identifier) @font-lock-variable-use-face)
      (caseCase label: (caseLabel (identifier) @font-lock-constant-face)))
 
+   ;; ERROR
+   :language 'pascal
+   :feature 'error
+   '(
+     ((ERROR) @font-lock-warning-face)
+     ((ERROR (identifier)) @font-lock-warning-face))
    ))
 
 (defun pascal-ts-setup ()

@@ -15,6 +15,15 @@ This is not on MELPA.
 - [https://www.masteringemacs.org/article/lets-write-a-treesitter-major-mode](https://www.masteringemacs.org/article/lets-write-a-treesitter-major-mode)
 - I took a lot of hints from `ada-ts-mode`: [https://github.com/brownts/ada-ts-mode](https://github.com/brownts/ada-ts-mode).
 
+# Improving over opascal-mode OOTB
+
+Besides using tree-sitter, what made me try this (and also easy to do and "modernizing" in the process):
+
+1. TS parser recognizes keywords in the form of `Procedure` as well as `procedure`.
+2. Preprocessor directives are properly colored and not treated like comments
+3. Types and variables, in the right places, are highlighted better.
+4. Highlighting different types of procedure/function declarations are better.
+
 # TODO
 
 Figure out what to do with the forms:

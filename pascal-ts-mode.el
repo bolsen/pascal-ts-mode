@@ -40,7 +40,7 @@
          kFile kFinalization kFinally kFor kFunction kGoto kHat kIf kImplementation kImplements
          kIn kInherited kInitialization kInterface kIs kLabel kLibrary kMod kNil kNot
          kOf kObject kOn kOr kOut kOverload kOverride kPacked kProcedure kProgram kProperty kPublic kPrivate
-         kProtected kRaise kRead kRecord kRepeat kRequired kResourcestring kSet kShl kShr kThen kThreadvar
+         kProtected kRaise kRead kRecord kRepeat kRequired kResourcestring kSet kShl kShr kSpecialize kThen kThreadvar
          kTo kTry kType kUnit kUses kUntil kVar kWhile kWith kWrite kXor))
   "OPASCAL4 keywords.")
 
@@ -109,7 +109,9 @@
     (declEnumValue name: (identifier) @font-lock-type-face)
     ((typeref (identifier)) @font-lock-type-face)
     (typeref (typerefPtr operator: _ operand: (identifier) @font-lock-type-face))
-    (recInitializerField name: (identifier) @font-lock-variable-name-face))
+    (recInitializerField name: (identifier) @font-lock-variable-name-face)
+    (typerefTpl entity: (identifier) @font-lock-type-face)
+    (typerefArgs (identifier) @font-lock-type-face))
 
   ;; Function and procedure calls.
   :language 'pascal

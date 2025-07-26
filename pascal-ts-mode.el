@@ -37,7 +37,7 @@
   (mapcar #'list ;; Keywords.
     '(kAnd kArray kAs kAsm kAt kBegin kCase kClass kConst kConstructor
          kDestructor kDispInterface kDiv kDo kDownto kElse kEnd kExcept kExports
-         kFile kFinalization kFinally kFor kFunction kGoto kHat kIf kImplementation kImplements
+         kFile kFinalization kFinally kFor kFunction kGoto kHat kHelper kIf kImplementation kImplements
          kIn kInherited kInitialization kInterface kIs kLabel kLibrary kMod kNil kNot
          kOf kObject kOn kOr kOut kOverload kOverride kPacked kProcedure kProgram kProperty kPublic kPrivate
          kProtected kRaise kRead kRecord kRepeat kRequired kResourcestring kSet kShl kShr kSpecialize kThen kThreadvar

@@ -97,28 +97,38 @@
    '((assignment lhs: (identifier) @font-lock-function-name-face)
      ([(kProcedure) (kFunction) (kConstructor) (kDestructor)]
       name: (identifier) @font-lock-function-name-face)
-    (declArg name: (identifier) @font-lock-variable-name-face)
-    (declConst name: (identifier) @font-lock-constant-face)
+
+    ;; constructor foobar
     (declProc (kConstructor) name: (identifier) @font-lock-function-name-face)
-    (declProc [(kFunction) (kProcedure) (kConstructor) (kDestructor)]
+
+    ;; function foobar.meth | procedure foobar.meth | constructor foobar.meth |
+    ;; destructor foobar.meth
+    (declProc [(kClass)] [(kFunction) (kProcedure) (kConstructor) (kDestructor)]
               name: (genericDot lhs: (identifier) @font-lock-type-face
                                 operator: _ rhs: (identifier) @font-lock-function-name-face))
-    ((kNil) @font-lock-constant-face)
-    ((kTrue) @font-lock-constant-face)
-    ((kFalse) @font-lock-constant-face)
+    (declArg name: (identifier) @font-lock-variable-name-face)
+
+    (declConst name: (identifier) @font-lock-constant-face)
     ((declString (kString)) @font-lock-type-face)
     (declVar name: (identifier) @font-lock-variable-name-face)
-    (declProp _ name: (identifier) @font-lock-variable-name-face)
+
+
+    (declProp _ name: (identifier) @font-lock-function-name-face)
     ((kRead) getter: (identifier) @font-lock-variable-use-face)
     ((kRead) getter: (identifier) @font-lock-variable-use-face (kWrite) setter: (identifier) @font-lock-variable-use-face)
+
     (inherited _ (identifier) @font-lock-variable-name-face)
     (with _ entity: (identifier) @font-lock-variable-name-face)
+
+    (exceptionHandler variable: (identifier) @font-lock-variable-name-face)
     )
 
   ;; Types
   :language 'pascal
   :feature 'type
   '((declType name: (identifier) @font-lock-type-face)
+    (genericTpl entity: (identifier) @font-lock-type-face)
+
     (declField name: (identifier) @font-lock-property-name-face)
     (declEnumValue name: (identifier) @font-lock-type-face)
     ((typeref (identifier)) @font-lock-type-face)
@@ -126,11 +136,14 @@
     (recInitializerField name: (identifier) @font-lock-variable-name-face)
     (typerefTpl entity: (identifier) @font-lock-type-face)
     (typerefArgs (identifier) @font-lock-type-face)
+    (typerefPtr operator: _ operand: (identifier) @font-lock-type-face)
     (typeref (typerefDot lhs: (typerefTpl entity: _ args: _ _) operator: _ rhs: _ @font-lock-type-face))
-    (genericTpl entity: (identifier) @font-lock-type-face)
     (genericArg name: (identifier) @font-lock-type-face)
     (genericArg name: (identifier) @font-lock-type-face _
-                type: (typeref (identifier) @font-lock-type-face)))
+                type: (typeref (identifier) @font-lock-type-face))
+
+    (genericDot (identifier) @type)
+    (genericDot (genericTpl entity: (identifier) @type)))
 
   ;; Function and procedure calls.
   :language 'pascal
@@ -142,7 +155,12 @@
     (exprDot lhs: _ operator: _ rhs: (identifier) @font-lock-function-call-face)
     (statement (identifier) @font-lock-function-call-face)
     (exprCall
-       entity: (inherited _ (identifier) @font-lock-function-call-face)))
+     entity: (inherited _ (identifier) @font-lock-function-call-face))
+
+    (statement (identifier) @font-lock-function-call-face)
+    (statement (exprDot rhs: (identifier) @font-lock-function-call-face))
+    (statement (exprTpl entity: (identifier) @font-lock-function-call-face))
+    (statement (exprDot rhs: (exprTpl entity: (identifier) @font-lock-function-call-face))))
 
   ;; String
 
@@ -162,13 +180,18 @@
    '((case (kCase) (identifier) @font-lock-variable-use-face)
      (caseCase label: (caseLabel (identifier) @font-lock-constant-face)))
 
+   :language 'pascal
+   :feature 'constant
+   '(((kNil) @font-lock-constant-face)
+    ((kTrue) @font-lock-constant-face)
+    ((kFalse) @font-lock-constant-face))
+
    ;; ERROR
    :language 'pascal
    :feature 'error
    '(
      ((ERROR) @font-lock-warning-face)
-     ((ERROR (identifier)) @font-lock-warning-face))
-   ))
+     ((ERROR (identifier)) @font-lock-warning-face))))
 
 (defun pascal-ts-setup ()
   "Setup treesit for Pascal."
@@ -180,7 +203,7 @@
 
   (setq-local treesit-font-lock-feature-list
               '((comment definition)
-                (keyword preprocessor string type)
+                (keyword preprocessor string type constant)
                 (attribute assignment constant control function number operator)
                 (bracket delimiter error label)))
 

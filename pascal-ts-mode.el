@@ -113,7 +113,9 @@
     (recInitializerField name: (identifier) @font-lock-variable-name-face)
     (typerefTpl entity: (identifier) @font-lock-type-face)
     (typerefArgs (identifier) @font-lock-type-face)
+    (typeref (typerefDot lhs: (typerefTpl entity: _ args: _ _) operator: _ rhs: _ @font-lock-type-face))
     (genericTpl entity: (identifier) @font-lock-type-face)
+    (genericArg name: (identifier) @font-lock-type-face)
     (genericArg name: (identifier) @font-lock-type-face _
                 type: (typeref (identifier) @font-lock-type-face)))
 

@@ -35,16 +35,29 @@
 
 (defconst pascal-ts-mode--keywords
   (mapcar #'list ;; Keywords.
-    '(kAnd kArray kAs kAsm kAt kBegin kCase kClass kConst kConstructor
-         kDestructor kDispInterface kDiv kDo kDownto kElse kEnd kExcept kExports
-         kFile kFinalization kFinally kFor kFunction kGoto kHat kHelper kIf kImplementation kImplements
-         kIn kInherited kInitialization kInterface kIs kLabel kLibrary kMod kNil kNot
-         kOf kObject kOn kOr kOut kOverload kOverride kPacked kProcedure kProgram kProperty kPublic kPublished kPrivate
-         kProtected kRaise kRead kRecord kRepeat kRequired kResourcestring kSet kShl kShr kSpecialize kThen kThreadvar
-         kTo kTry kType kUnit kUses kUntil kVar kWhile kWith kWrite kXor))
+          '(
+            kAbsolute kAbstract kAnd kArray kAs kAsm kAssembler kAt
+            kBegin
+            kCase kCdecl kCppdecl kClass kCvar kConst kConstref kConstructor
+            kDefault kDelayed kDeprecated kDestructor kDispId kDispInterface kDiv kDo kDownto kDynamic
+            kElse kEnd kExcept kExperimental kExport kExports kExternal
+            kFar kFile kFinalization kFinally kFor kForward kFunction
+            kGoto
+            kHardfloat kHat kHelper
+            kIf kImplementation kImplements kIn kIndex kInherited kInitialization kInline kInterface kInterrupt kIocheck kIs
+            kLabel kLibrary kLocal
+            kMessage kMod kMs_abi_default kMs_abi_cdecl kMwpascal
+            kName kNear kNil kNodefault kNoreturn kNostackframe kNot
+            kOf kObject kObjcclass kObjccategory kObjcprotocol kOn kOperator kOptional kOr kOut kOverload kOverride
+            kPacked kPascal kPlatform kProcedure kProgram kProperty kPublic kPublished kPrivate kProtected
+            kRaise kRead kRegister kReintroduce kRecord kRepeat kRequired kResourcestring
+            kSafecall kSaveregisters kSealed kSet kShl kShr kSoftfloat kSpecialize kStatic kStdcall kString kStrict kStored
+            kThen kThreadvar kTo kTry kType
+            kUnit kUses kUnimplemented kUntil
+            kVar kVarargs kVectorcall kVirtual
+            kWhile kWith kWinapi kWrite
+            kXor))
   "OPASCAL4 keywords.")
-
-;; missing kPackage, kContains, kRequires, kResult, kSelf
 
 (defvar pascal-ts-mode--font-lock-settings
   (treesit-font-lock-rules

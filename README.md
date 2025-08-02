@@ -26,7 +26,22 @@ Besides using tree-sitter, what made me try this (and also easy to do and "moder
 
 # TODO
 
-Figure out what to do with the forms:
+These forms are not handled correctly by tree-sitter at the moment, so they will not color correctly:
 
-1. `A := CallFunction;` : `CallFunction` would not be highlighted because it could be a function or a variable.
-2. `Var.Func` : `Var` would not highlighted, because it can be a variable or a type.
+1. `function ToArray: TArray<T>; override; final;` : The `final` keyword is not implemented in tree-sitter (with `{$mode delphi}`. Example: `generics.collections.pas`).
+2. `experimental` keyword is listed but it is not highlighting here.
+3. The tree-sitter parser doesn't like this (line 795, generic.collections.pas in FP 3.2.2 ):
+   ```
+   TAVLTreeMap<TKey, TValue> = class(TCustomAVLTreeMap<TKey, TValue, TEmptyRecord>)
+   public
+       property Items; default;
+   end;
+
+    TIndexedAVLTreeMap<TKey, TValue> = class(TCustomAVLTreeMap<TKey, TValue, SizeInt>)
+    ```
+4. tree-sitter is strict with the order of `except` and `finally`. There can be a case where you have `finally` before an `except` but each is in a preprocessor `{$if...}`.
+
+For this project:
+
+1. Align more with the tree-sitter-pascal project's highlights.scm file.
+2. Implement hooks to handle indentation.

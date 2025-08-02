@@ -103,7 +103,7 @@
 
     ;; function foobar.meth | procedure foobar.meth | constructor foobar.meth |
     ;; destructor foobar.meth
-    (declProc [(kClass)] [(kFunction) (kProcedure) (kConstructor) (kDestructor)]
+    (declProc [(kFunction) (kProcedure) (kConstructor) (kDestructor)]
               name: (genericDot lhs: (identifier) @font-lock-type-face
                                 operator: _ rhs: (identifier) @font-lock-function-name-face))
     (declArg name: (identifier) @font-lock-variable-name-face)

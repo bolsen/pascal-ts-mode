@@ -112,7 +112,10 @@
     (typeref (typerefPtr operator: _ operand: (identifier) @font-lock-type-face))
     (recInitializerField name: (identifier) @font-lock-variable-name-face)
     (typerefTpl entity: (identifier) @font-lock-type-face)
-    (typerefArgs (identifier) @font-lock-type-face))
+    (typerefArgs (identifier) @font-lock-type-face)
+    (genericTpl entity: (identifier) @font-lock-type-face)
+    (genericArg name: (identifier) @font-lock-type-face _
+                type: (typeref (identifier) @font-lock-type-face)))
 
   ;; Function and procedure calls.
   :language 'pascal

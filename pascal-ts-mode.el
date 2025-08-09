@@ -42,7 +42,7 @@
             kDefault kDelayed kDeprecated kDestructor kDispId kDispInterface kDiv kDo kDownto kDynamic
             kElse kEnd kExcept kExperimental kExport kExports kExternal
             kFar kFile kFinalization kFinally kFor kForward kFunction
-            kGoto
+            kGeneric kGoto
             kHardfloat kHat kHelper
             kIf kImplementation kImplements kIn kIndex kInherited kInitialization kInline kInterface kInterrupt kIocheck kIs
             kLabel kLibrary kLocal

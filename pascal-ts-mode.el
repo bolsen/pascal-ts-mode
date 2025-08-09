@@ -48,7 +48,7 @@
             kLabel kLibrary kLocal
             kMessage kMod kMs_abi_default kMs_abi_cdecl kMwpascal
             kName kNear kNil kNodefault kNoreturn kNostackframe kNot
-            kOf kObject kObjcclass kObjccategory kObjcprotocol kOn kOperator kOptional kOr kOut kOverload kOverride
+            kOf kObject kObjcclass kObjccategory kObjcprotocol kOn kOperator kOptional kOr kOtherwise kOut kOverload kOverride
             kPacked kPascal kPlatform kProcedure kProgram kProperty kPublic kPublished kPrivate kProtected
             kRaise kRead kRegister kReintroduce kRecord kRepeat kRequired kResourcestring
             kSafecall kSaveregisters kSealed kSet kShl kShr kSoftfloat kSpecialize kStatic kStdcall kString kStrict kStored

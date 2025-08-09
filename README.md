@@ -7,7 +7,7 @@ This is a quick-and-dirty (for now) Emacs mode for the Pascal tree-sitter gramma
 This is not on MELPA.
 
 1. Clone the repo
-2. Run `(treesit-install-language-grammar)` and use the grammar from here: [https://github.com/Isopod/tree-sitter-pascal](https://github.com/Isopod/tree-sitter-pascal).
+2. Run `(treesit-install-language-grammar)` and use the grammar from here: [https://github.com/bolsen/tree-sitter-pascal](https://github.com/bolsen/tree-sitter-pascal). (This is my fork, which I started to fix small issues in, until I can fully recommend the original Isopod/tree-sitter-pascal version. Using the upstream version will break highlighting completely.)
 2. Add to your init file: `(load-file "path-to/pascal-ts-mode.el")`
 
 # References

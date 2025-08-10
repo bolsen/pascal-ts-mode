@@ -110,8 +110,12 @@
 
     (declConst name: (identifier) @font-lock-constant-face)
     ((declString (kString)) @font-lock-type-face)
-    (declVar name: (identifier) @font-lock-variable-name-face)
 
+    (declVar name: (identifier) @font-lock-variable-name-face)
+    ;; this handles a case like (as a declVar):
+    ;; var
+    ;;    src: TSomeType absolute someParam;
+    ((kAbsolute) (identifier) @font-lock-variable-use-face)
 
     (declProp _ name: (identifier) @font-lock-function-name-face)
     ((kRead) getter: (identifier) @font-lock-variable-use-face)
@@ -185,6 +189,12 @@
    '(((kNil) @font-lock-constant-face)
     ((kTrue) @font-lock-constant-face)
     ((kFalse) @font-lock-constant-face))
+
+   :language 'pascal
+   :feature 'control
+   :override 'prepend
+   ;; special case when we know the type : `if Variable is TSomeType`
+   '((ifElse (kIf) condition: (exprBinary lhs: _ operator: (kIs) rhs: (identifier) @font-lock-type-face)))
 
    ;; ERROR
    :language 'pascal

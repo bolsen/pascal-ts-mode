@@ -32,7 +32,7 @@
 
 (require 'compile)
 
-(defun complication-free-pascal ()
+(defun compilation-free-pascal ()
   "SET the regexes required to Free Pascal output in `compilation-mode'."
   (interactive)
   (add-to-list 'compilation-error-regexp-alist 'fpc)

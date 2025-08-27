@@ -49,7 +49,7 @@ Free Pascal is not supported in Emacs by default, but all that's needed is to ha
 
 ```
 (load-file "path-to/flycheck-free-pascal.el")
-(complication-free-pascal)
+(compilation-free-pascal)
 ```
 
 # TODO

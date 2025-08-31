@@ -35,7 +35,7 @@
 (flycheck-define-checker free-pascal
   "A Free Pascal syntax checker using the FPC compiler.
 See URL `https://www.freepascal.org/'."
-  :command ("fpc.sh" "-vp" "-s" source)
+  :command ("fpc.sh" "-s" source)
   :error-patterns
   ((error line-start (file-name) "(" line "," column ") " (or "Error: " "Fatal: ") (message) line-end)
    (warning line-start (file-name) "(" line "," column ") " "Warning: " (message) line-end)

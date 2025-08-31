@@ -156,6 +156,9 @@
 
   '((exprCall entity: (identifier) @font-lock-function-call-face)
     (exprCall entity: (exprDot lhs: _ operator: _ rhs: (identifier) @font-lock-function-call-face))
+
+    ;; handles specialize Func<Type>();
+    (exprCall (exprTpl entity: (kSpecialize)  entity: (identifier) @font-lock-function-call-face (kLt) args: (identifier) @font-lock-type-face))
     (exprDot lhs: _ operator: _ rhs: (identifier) @font-lock-function-call-face)
     (statement (identifier) @font-lock-function-call-face)
     (exprCall

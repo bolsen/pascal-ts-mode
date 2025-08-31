@@ -50,7 +50,7 @@
             kName kNear kNil kNodefault kNoreturn kNostackframe kNot
             kOf kObject kObjcclass kObjccategory kObjcprotocol kOn kOperator kOptional kOr kOtherwise kOut kOverload kOverride
             kPacked kPascal kPlatform kProcedure kProgram kProperty kPublic kPublished kPrivate kProtected
-            kRaise kRead kRegister kReintroduce kRecord kRepeat kRequired kResourcestring
+            kRaise kRead kRegister kReintroduce kRecord kReference kRepeat kRequired kResourcestring
             kSafecall kSaveregisters kSealed kSet kShl kShr kSoftfloat kSpecialize kStatic kStdcall kString kStrict kStored
             kThen kThreadvar kTo kTry kType
             kUnit kUses kUnimplemented kUntil

@@ -119,6 +119,7 @@
 
     (declProp _ name: (identifier) @font-lock-function-name-face)
     ((kRead) getter: (identifier) @font-lock-variable-use-face)
+    ((kWrite) setter: (identifier) @font-lock-variable-use-face)
     ((kRead) getter: (identifier) @font-lock-variable-use-face (kWrite) setter: (identifier) @font-lock-variable-use-face)
 
     (inherited _ (identifier) @font-lock-variable-name-face)

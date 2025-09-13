@@ -171,6 +171,10 @@
 
     ;; handles specialize Func<Type>();
     ((exprTpl entity: (kSpecialize)  entity: (identifier) @font-lock-function-call-face (kLt) args: (identifier) @font-lock-type-face))
+
+    ;; handles Class<Type> in delphi
+    (exprTpl entity: (identifier) @font-lock-function-name-face _ args: (identifier) @font-lock-type-face _)
+
     (exprDot lhs: _ operator: _ rhs: (identifier) @font-lock-function-call-face)
     (statement (identifier) @font-lock-function-call-face)
     (exprCall

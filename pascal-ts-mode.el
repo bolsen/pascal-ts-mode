@@ -106,6 +106,17 @@
     (declProc [(kFunction) (kProcedure) (kConstructor) (kDestructor)]
               name: (genericDot lhs: (identifier) @font-lock-type-face
                                 operator: _ rhs: (identifier) @font-lock-function-name-face))
+
+    ;; function Class<T>.Func
+    (declProc [(kFunction) (kProcedure) (kConstructor) (kDestructor)]
+              name: (genericDot lhs:
+                       (genericTpl entity: (identifier) @font-lock-type-face _
+                    args: (genericArgs
+                           (genericArg name: (identifier) @font-lock-type-face))
+                    _)
+                       operator: _
+                       rhs: (identifier) @font-lock-function-name-face))
+
     (declArg name: (identifier) @font-lock-variable-name-face)
 
     (declConst name: (identifier) @font-lock-constant-face)
@@ -159,7 +170,7 @@
     (exprCall entity: (exprDot lhs: _ operator: _ rhs: (identifier) @font-lock-function-call-face))
 
     ;; handles specialize Func<Type>();
-    (exprCall (exprTpl entity: (kSpecialize)  entity: (identifier) @font-lock-function-call-face (kLt) args: (identifier) @font-lock-type-face))
+    ((exprTpl entity: (kSpecialize)  entity: (identifier) @font-lock-function-call-face (kLt) args: (identifier) @font-lock-type-face))
     (exprDot lhs: _ operator: _ rhs: (identifier) @font-lock-function-call-face)
     (statement (identifier) @font-lock-function-call-face)
     (exprCall
